@@ -45,7 +45,7 @@ async function main() {
 
   const alreadyScrapedPOTDs = new Set(await fs.promises.readdir(path.resolve(__dirname, 'potds')));
 
-  await page.goto('https://prairielearn.engr.illinois.edu/pl/');
+  await page.goto('https://prairielearn.org/pl/');
 
   const cs225CourseLinks = await page.$x("//a[contains(text(), 'CS 225')]");
   if (cs225CourseLinks.length !== 1) {
@@ -135,10 +135,10 @@ const promptPromise = schema => new Promise((resolve, reject) => {
 });
 
 async function login(page) {
-  await page.goto('https://prairielearn.engr.illinois.edu/pl/');
+  await page.goto('https://www.prairielearn.org/pl/login');
 
-  const illinoisIconSelector = '.login-methods img[src="/images/illinois_logo.svg"]';
-  const logoutButtonSelector = 'a.btn[href="/pl/logout"]';
+  const illinoisIconSelector = '.login-methods img[src="/images/illinois_logo.svg"]'; // button for signing in with Illinois
+  const logoutButtonSelector = 'a[href="/pl/logout"]';
   if (await page.$(illinoisIconSelector)) { // if not logged in
     await page.click(illinoisIconSelector);
 
